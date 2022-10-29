@@ -8,10 +8,10 @@ import { galleryItems } from './gallery-items.js';
 // 4. Відкриття модального вікна по кліку на елементі галереї. Для цього ознайомся з документацією і прикладами.
 // 5. Заміна значення атрибута src елемента <img> в модальному вікні перед відкриттям. Використовуй готову розмітку модального вікна із зображенням з прикладів бібліотеки basicLightbox.
 const divGalleryRef = document.querySelector(".gallery");
-
+//Створення розмітки
 const createGallary = (items) => {
    return items
-      .map((item) => 
+      .map((item) =>
          `<div class="gallery__item">
             <a class="gallery__link" href="large-image.jpg">
                <img
@@ -24,29 +24,30 @@ const createGallary = (items) => {
          </div>`
       )
       .join("");
-}
+};
 
 const clickOnImg = (evt) => {
+   //Не переходимо за посиланням на нову сторінку
    evt.preventDefault()
-
-   if (evt.target.nodeName !== "IMG"){
+   //Якщо натискаэмо мишкою не по IMG виходимо з функції.
+   if (evt.target.nodeName !== "IMG") {
       return;
    }
-
+   // Створюємо розмітку елемента LightBox Та трішки нижче відображаємо його
    const createWindowImg = basicLightbox.create(`
-		<img width="1400" height="900" src="${evt.target.dataset.source}" width="1280" height="1024">
-	`);
+		<img width="1400" height="900" src="${evt.target.dataset.source}">`);
 
    createWindowImg.show();
-
+   //Створюэмо новий обробник подій і перевірку на натискання клавіші Escape, у випадку натискання закриваємо вікно lightBox закриваємо.
    divGalleryRef.addEventListener("keydown", (evt) => {
       console.log(evt.key);
       if (evt.key === "Escape") {
          createWindowImg.close();
       }
    });
-}
+};
 
+// Відображення створеної розмітки на сторінці HTML
 divGalleryRef.innerHTML = createGallary(galleryItems);
-
+//Створюэмо обробник подій "натискання мишки на Блок <div class="gallery"></div>"
 divGalleryRef.addEventListener("click", clickOnImg);
