@@ -8,7 +8,7 @@ import { galleryItems } from './gallery-items.js';
 // 4. Відкриття модального вікна по кліку на елементі галереї. Для цього ознайомся з документацією і прикладами.
 // 5. Заміна значення атрибута src елемента <img> в модальному вікні перед відкриттям. Використовуй готову розмітку модального вікна із зображенням з прикладів бібліотеки basicLightbox.
 const divGalleryRef = document.querySelector(".gallery");
-//Створення розмітки
+//Створення розмітки Галереї
 const createGallary = (items) => {
    return items
       .map((item) =>
@@ -49,5 +49,6 @@ const clickOnImg = (evt) => {
 
 // Відображення створеної розмітки на сторінці HTML
 divGalleryRef.innerHTML = createGallary(galleryItems);
-//Створюэмо обробник подій "натискання мишки на Блок <div class="gallery"></div>"
+
+//Створюємо обробник подій "натискання мишки на Блок <div class="gallery"></div>"
 divGalleryRef.addEventListener("click", clickOnImg);
