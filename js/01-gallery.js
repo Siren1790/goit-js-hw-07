@@ -37,7 +37,15 @@ const clickOnImg = (evt) => {
 
    // Створюємо розмітку елемента LightBox Та трішки нижче відображаємо його
    const createWindowImg = basicLightbox.create(`
-		<img width="1400" height="900" src="${evt.target.dataset.source}">`);
+		<img width="1400" height="900" src="${evt.target.dataset.source}">`, 
+      {
+         // При закриванні модельного вікна вішаємо знову разовий слухач. 
+         onClose: () => {
+            divGalleryRef.addEventListener("click", clickOnImg, {once: true});        
+         }
+      }
+   );
+   
    createWindowImg.show();
 
    //Створюємо новий обробник подій і перевірку на натискання клавіші Escape, у випадку натискання закриваємо вікно lightBox.
@@ -51,5 +59,5 @@ const clickOnImg = (evt) => {
 // Відображення створеної розмітки на сторінці HTML
 divGalleryRef.innerHTML = createGallary(galleryItems);
 
-//Створюємо обробник подій "натискання мишки на Блок <div class="gallery"></div>"
-divGalleryRef.addEventListener("click", clickOnImg);
+//Створюємо обробник подій (разовий) "натискання мишки на Блок <div class="gallery"></div>"
+divGalleryRef.addEventListener("click", clickOnImg, {once: true});
