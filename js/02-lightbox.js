@@ -15,5 +15,9 @@ const createGallary = (items) => {
 
 divGalleryRef.innerHTML = createGallary(galleryItems);
 
-const gallery = new SimpleLightbox('.gallery a', { /* options */captionsData: 'alt', captionDelay: '250'});
+const gallery = new SimpleLightbox('.gallery a', {
+   /* options */
+   captionsData: 'alt',
+   captionDelay: '250'
+});
 
