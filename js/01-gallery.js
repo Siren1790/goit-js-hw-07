@@ -29,18 +29,19 @@ const createGallary = (items) => {
 const clickOnImg = (evt) => {
    //Не переходимо за посиланням на нову сторінку
    evt.preventDefault()
+   
    //Якщо натискаэмо мишкою не по IMG виходимо з функції.
    if (evt.target.nodeName !== "IMG") {
       return;
    }
+
    // Створюємо розмітку елемента LightBox Та трішки нижче відображаємо його
    const createWindowImg = basicLightbox.create(`
 		<img width="1400" height="900" src="${evt.target.dataset.source}">`);
-
    createWindowImg.show();
-   //Створюэмо новий обробник подій і перевірку на натискання клавіші Escape, у випадку натискання закриваємо вікно lightBox закриваємо.
+
+   //Створюємо новий обробник подій і перевірку на натискання клавіші Escape, у випадку натискання закриваємо вікно lightBox.
    divGalleryRef.addEventListener("keydown", (evt) => {
-      console.log(evt.key);
       if (evt.key === "Escape") {
          createWindowImg.close();
       }
