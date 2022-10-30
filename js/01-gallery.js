@@ -35,29 +35,35 @@ const clickOnImg = (evt) => {
       return;
    }
 
+
    // Створюємо розмітку елемента LightBox Та трішки нижче відображаємо його
    const createWindowImg = basicLightbox.create(`
 		<img width="1400" height="900" src="${evt.target.dataset.source}">`, 
       {
-         // При закриванні модельного вікна вішаємо знову разовий слухач. 
+         //Створюємо новий обробник подій який перевіряє натискання клавіші Escape
+         onShow: () => {
+            divGalleryRef.addEventListener("keydown", keydownEscape); 
+         },
+         // Видаляємо обробник подій який перевіряє натискання клавіші Escape
          onClose: () => {
-            divGalleryRef.addEventListener("click", clickOnImg, {once: true});        
+            divGalleryRef.removeEventListener("keydown", keydownEscape);   
          }
       }
    );
-   
-   createWindowImg.show();
 
-   //Створюємо новий обробник подій і перевірку на натискання клавіші Escape, у випадку натискання закриваємо вікно lightBox.
-   divGalleryRef.addEventListener("keydown", (evt) => {
+   // Перевірка на натискання клавіші Escape, у випадку натискання закриваємо вікно lightBox. 
+   function keydownEscape (evt) {
       if (evt.key === "Escape") {
          createWindowImg.close();
       }
-   });
+   }
+
+   
+   createWindowImg.show();
 };
 
 // Відображення створеної розмітки на сторінці HTML
 divGalleryRef.innerHTML = createGallary(galleryItems);
 
-//Створюємо обробник подій (разовий) "натискання мишки на Блок <div class="gallery"></div>"
-divGalleryRef.addEventListener("click", clickOnImg, {once: true});
+//Створюємо обробник подій "натискання мишки на Блок <div class="gallery"></div>"
+divGalleryRef.addEventListener("click", clickOnImg);
