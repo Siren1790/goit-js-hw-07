@@ -28,8 +28,7 @@ const createGallary = (items) => {
 
 const clickOnImg = (evt) => {
    //Не переходимо за посиланням на нову сторінку
-   evt.preventDefault()
-   
+   evt.preventDefault();
    //Якщо натискаэмо мишкою не по IMG виходимо з функції.
    if (evt.target.nodeName !== "IMG") {
       return;
